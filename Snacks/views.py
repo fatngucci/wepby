@@ -114,7 +114,7 @@ def snack_delete(request, **kwargs):
         to_be_deleted.delete()
         return redirect('snack-list')
 
-    context = {'that_one_snack': to_be_deleted,
+    context = {'the_snack': to_be_deleted,
                'can_delete': can_delete}
 
     return render(request, 'snack-delete.html', context)

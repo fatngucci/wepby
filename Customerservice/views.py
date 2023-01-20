@@ -30,6 +30,7 @@ def snack_edit_view(request, pk: str):
         if form.is_valid():
             snack = Snack.objects.get(id=snack_id)
             new_name = form.cleaned_data['name']
+            new_beschreibung = form.cleaned_data['beschreibung']
             new_gewicht = form.cleaned_data['gewicht']
             new_artikelnummer = form.cleaned_data['artikelnummer']
             new_preis = form.cleaned_data['preis']
@@ -37,6 +38,7 @@ def snack_edit_view(request, pk: str):
             new_pic = form.cleaned_data['bilder']
             new_file = form.cleaned_data['produkt_info']
             snack.name = new_name
+            snack.beschreibung = new_beschreibung
             snack.gewicht = new_gewicht
             snack.artikelnummer = new_artikelnummer
             snack.preis = new_preis

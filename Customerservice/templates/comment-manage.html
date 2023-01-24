@@ -16,12 +16,12 @@
                             <div class="col-12">
                                 <div class="card m-1">
                                     <div class="card-body">
-                                        <p>Text: <a
+                                        <p>text: <a
                                                 href="{% url 'snack-detail' the_comment.snack.id %}"><b>{{ the_comment.text }}</b></a>
                                         </p>
-                                        <p>Sterne: {{ the_comment.sternbewertung }}</p>
-                                        <p>von: {{ the_comment.poster.username }}</p>
-                                        <p>Meldungen:
+                                        <p>rating: {{ the_comment.sternbewertung }}</p>
+                                        <p>by: {{ the_comment.poster.username }}</p>
+                                        <p>reports:
                                             {{ the_comment.get_reports_count }}</p>
                                     </div>
                                     {% if can_delete %}
@@ -47,12 +47,16 @@
                                 <div class="col-12">
                                     <div class="card m-1">
                                         <div class="card-body">
-                                            <p>Text: <a
+                                            <p>text: <a
                                                     href="{% url 'snack-detail' comment.snack.id %}"><b>{{ comment.text }}</b></a>
                                             </p>
-                                            <p>Sterne: {{ comment.sternbewertung }}</p>
-                                            <p>von: {{ comment.poster.username }}</p>
-                                            <p>Meldungen: {{ comment.get_reports_count }}</p>
+                                            <p>rating: {{ comment.sternbewertung }}</p>
+                                            <p>by: {{ comment.poster.username }}</p>
+                                            {% if comment.get_reports_count > 0 %}
+                                                <p><span style="background: red; color: white; border-radius: .25rem; padding: 0.2rem">reports: {{ comment.get_reports_count }}</span></p>
+                                            {% else %}
+                                                <p>reports: {{ comment.get_reports_count }}</p>
+                                            {% endif %}
                                         </div>
 
                                         {% if can_delete %}

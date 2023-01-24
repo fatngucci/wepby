@@ -18,10 +18,11 @@
     {% block more_javascript %}{% endblock %}
     {% block css %}{% endblock %}
     <title>{% block title %}Base Titel{% endblock %}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'pictures/PngItem_1699003.png' %}"/>
 </head>
 <body>
-    {% block header %}{% endblock %}
-    {% block content %}Base Block{% endblock %}
-    {% block footer %}{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}Base Block{% endblock %}
+{% block footer %}{% endblock %}
 </body>
 </html>

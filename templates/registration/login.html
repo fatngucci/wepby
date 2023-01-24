@@ -3,17 +3,16 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="text-center">
         <h2>Login</h2>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button class="border rounded btn-primary px-3 py-2" type="submit">Login</button>
+            or
+            <a href="{% url 'signup' %}">
+                <button class="border rounded btn btn-outline-primary px-3 py-2 mb-1" type="button">Signup</button>
+            </a>
         </form>
-        <br>
-        <p>Or sign up</p>
-        <a href="{% url 'signup' %}">
-            <button class="border rounded btn btn-outline-primary px-3 py-2">Signup</button>
-        </a>
     </div>
 {% endblock %}

@@ -3,10 +3,17 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    <div class="container-fluid">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="border rounded btn-primary px-3 py-2" type="submit">Login</button>
+        </form>
+        <br>
+        <p>Or sign up</p>
+        <a href="{% url 'signup' %}">
+            <button class="border rounded btn btn-outline-primary px-3 py-2">Signup</button>
+        </a>
+    </div>
 {% endblock %}

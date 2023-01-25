@@ -8,14 +8,18 @@ class SnackEditForm(forms.ModelForm):
     class Meta:
         model = Snack
         fields = ('name', 'gewicht', 'beschreibung', 'artikelnummer', 'preis', 'hersteller', 'bilder', 'produkt_info')
-        widgets = {
-            'snack_id': forms.HiddenInput(),
-        }
-    """
+
+        #widgets = {
+        #    'snack_id': forms.HiddenInput(),
+        #}
+    #def __init__(self, *args, **kwargs):
+    #    widgets = {
+    #        'snack_id': forms.HiddenInput(),
+    #    }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_method = 'POST'
+        self.helper.form_method = 'post'
         self.helper.layout = Layout(
             Row(
                 Column('name', css_class='form-group  mx-auto'),
@@ -28,7 +32,7 @@ class SnackEditForm(forms.ModelForm):
             Row(
                 Column('artikelnummer', css_class='form-group  mx-auto'),
                 Column('preis', css_class='form-group mx-auto'),
-
+                Column('hersteller', css_class='form-group mx-auto'),
             ),
             Row(
 
@@ -44,7 +48,7 @@ class SnackEditForm(forms.ModelForm):
                 css_class='text-center'
             ),
         )
-    """
+
 
 
 class CommentEditForm(forms.ModelForm):

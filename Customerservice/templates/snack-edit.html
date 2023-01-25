@@ -16,12 +16,12 @@
                     <img src="{{ snack.bilder.url }}" height="350" width="350"><br>
                 </div>
                 <div class="col-md-6 col-sm-12 mb-5">
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <!--{% crispy form %}-->
-                        <button class="border rounded btn-outline-primary px-3 py-2" type="submit">Edit</button>
-                        <button class="border rounded btn-outline-dark px-3 py-2" type="submit" name="cancel">Cancel</button>
+                        <!--{{ form.as_p }}-->
+                        {% crispy form %}
+                        <!--<button class="border rounded btn-outline-primary px-3 py-2" type="submit">Edit</button>
+                        <button class="border rounded btn-outline-dark px-3 py-2" type="submit" name="cancel">Cancel</button>-->
                     </form>
                 </div>
             </div>

@@ -34,7 +34,7 @@ def snack_edit_view(request, pk: str):
             new_gewicht = form.cleaned_data['gewicht']
             new_artikelnummer = form.cleaned_data['artikelnummer']
             new_preis = form.cleaned_data['preis']
-            new_hersteller = form.cleaned_data['hersteller']
+            new_hersteller = form.cleaned_data['hersteller'] # ??
             new_pic = form.cleaned_data['bilder']
             new_file = form.cleaned_data['produkt_info']
             snack.name = new_name

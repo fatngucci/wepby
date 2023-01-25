@@ -9,10 +9,11 @@ class SnackEditForm(forms.ModelForm):
         model = Snack
         fields = ('name', 'gewicht', 'beschreibung', 'artikelnummer', 'preis', 'hersteller', 'bilder', 'produkt_info')
 
-        #widgets = {
+        # widgets = {
         #    'snack_id': forms.HiddenInput(),
-        #}
-    #def __init__(self, *args, **kwargs):
+        # }
+
+    # def __init__(self, *args, **kwargs):
     #    widgets = {
     #        'snack_id': forms.HiddenInput(),
     #    }
@@ -50,7 +51,6 @@ class SnackEditForm(forms.ModelForm):
         )
 
 
-
 class CommentEditForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -59,3 +59,24 @@ class CommentEditForm(forms.ModelForm):
             'sternbewertung': forms.Select(choices=Comment.STERN_BEWERTUNG),
             'comment_id': forms.HiddenInput()
         }
+
+    def __init__(self, *args, **kwargs):
+        widgets = {
+            'sternbewertung': forms.Select(choices=Comment.STERN_BEWERTUNG),
+            'comment_id': forms.HiddenInput()
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            Column('text', css_class='form-group  mx-auto'),
+            Column('sternbewertung', css_class='form-group mx-auto'),
+
+            Div(
+                Submit('submit', 'Edit', css_class='btn mx-auto'),
+                Submit('cancel', 'Cancel', css_class='btn mx-auto'),
+                css_class='text-center'
+            ),
+        )

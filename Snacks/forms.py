@@ -52,6 +52,26 @@ class CommentEditForm(forms.ModelForm):
             'sternbewertung': forms.Select(choices=Comment.STERN_BEWERTUNG),
             'comment_id': forms.HiddenInput()
         }
+    def __init__(self, *args, **kwargs):
+        widgets = {
+            'sternbewertung': forms.Select(choices=Comment.STERN_BEWERTUNG),
+            'comment_id': forms.HiddenInput()
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            Column('text', css_class='form-group  mx-auto'),
+            Column('sternbewertung', css_class='form-group mx-auto'),
+
+            Div(
+                Submit('submit', 'Edit', css_class='btn mx-auto'),
+                Submit('cancel', 'Cancel', css_class='btn mx-auto'),
+                css_class='text-center'
+            ),
+        )
 
 
 class SearchForm(forms.ModelForm):

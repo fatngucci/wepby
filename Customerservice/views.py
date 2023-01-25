@@ -111,6 +111,7 @@ def comment_edit_view(request, pk: str):
             comment.text = new_text
             comment.sternbewertung = new_stern
             comment.save()
+        return redirect('comment-manage')
 
     else:
         can_delete = False

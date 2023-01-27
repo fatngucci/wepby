@@ -3,16 +3,18 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <div class="text-center">
-        <h2>Login</h2>
+    <div class="text-center container">
+        <div class="display-3 my-2 text-center mb-5">Login</div>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="border rounded btn-primary px-3 py-2" type="submit">Login</button>
-            or
-            <a href="{% url 'signup' %}">
-                <button class="border rounded btn btn-outline-primary px-3 py-2 mb-1" type="button">Signup</button>
-            </a>
+            <div class="my-5">
+                <button class="border rounded btn-primary px-3 py-2" type="submit">Login</button>
+                or
+                <a href="{% url 'signup' %}">
+                    <button class="border rounded btn btn-outline-primary px-3 py-2 mb-1" type="button">Signup</button>
+                </a>
+            </div>
         </form>
     </div>
 {% endblock %}

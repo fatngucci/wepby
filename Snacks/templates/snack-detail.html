@@ -32,7 +32,11 @@
                     <img src="{% static 'Snacks/staryellow.png' %}" height="25" , width="25">
                 </div>
                 <div class="text-center text-muted h6">
-                    Artikelnummer: {{ that_one_snack.artikelnummer }}
+                    item number: {{ that_one_snack.artikelnummer }}
+                </div>
+                <div class="text-center text-muted h6">
+                    <a href="{{ that_one_snack.produkt_info.url }}" style="text-decoration: none"><small>product
+                        info</small></a>
                 </div>
                 <!--
                 <table class="" style="border-spacing: 0.5em; border-collapse: separate">
@@ -86,11 +90,12 @@
                         <div class="row">
                             <div class="my-auto">
                                 {% csrf_token %}
-                                {{ add_form.as_p }}
+                                <!--{{ add_form.as_p }}-->
+                                {% crispy add_form %}
                             </div>
-                            <button class="border rounded text-white bg-primary px-3 py-2" type="submit" name="cart">Add
+                            <!--<button class="border rounded text-white bg-primary px-3 py-2" type="submit" name="cart">Add
                                 to shopping cart
-                            </button>
+                            </button>-->
                         </div>
                     </form>
                 {% else %}
@@ -108,7 +113,8 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="card-title">{{ comment.text }}<br></div>
-                                <small class="card-text">{{ comment.poster.username }} on {{ comment.timestamp }}</small>
+                                <small class="card-text">{{ comment.poster.username }}
+                                    on {{ comment.timestamp }}</small>
                                 <div>
                                     {% for star in comment.get_sterne %}
                                         {% if star %}
@@ -134,10 +140,34 @@
                                             </a>
                                             <br>
                                             {% if comment.poster == user %}
-                                                <a href="{% url 'comment-edit' comment.id %}"><button class="border rounded btn-outline-secondary mt-3 px-3 py-2">Edit</button></a>
-                                                <a href="{% url 'comment-delete' comment.id %}"><button class="border rounded btn-outline-danger mt-3 px-3 py-2">Delete</button></a>
+                                                <a href="{% url 'comment-edit' comment.id %}">
+                                                    <button class="border rounded btn-outline-secondary mt-3 px-3 py-2">
+                                                        Edit
+                                                    </button>
+                                                </a>
+                                                <a href="{% url 'comment-delete' comment.id %}">
+                                                    <button class="border rounded btn-outline-danger mt-3 px-3 py-2">
+                                                        Delete
+                                                    </button>
+                                                </a>
                                             {% else %}
-                                                <a href="{% url 'comment-report' comment.id %}"><button class="border rounded btn-outline-danger mt-3 px-3 py-2">Report</button></a>
+                                                {% if user.can_delete %}
+                                                    <a href="{% url 'comment-edit' comment.id %}">
+                                                        <button class="border rounded btn-outline-secondary mt-3 px-3 py-2">
+                                                            Edit
+                                                        </button>
+                                                    </a>
+                                                    <a href="{% url 'comment-delete' comment.id %}">
+                                                        <button class="border rounded btn-outline-danger mt-3 px-3 py-2">
+                                                            Delete
+                                                        </button>
+                                                    </a>
+                                                {% endif %}
+                                                <a href="{% url 'comment-report' comment.id %}">
+                                                    <button class="border rounded btn-outline-danger mt-3 px-3 py-2">
+                                                        Report
+                                                    </button>
+                                                </a>
                                             {% endif %}
                                             <br>
                                         </div>
@@ -167,16 +197,15 @@
             </div>
             <div class="row p-4 col-6 mt-0">
                 {% if user.is_authenticated %}
-                    <b style="color: white">Share your thoughts on this snack</b>
                     <form class="" method="POST">
+                        <div class="text-center"><b>Share your thoughts on this snack</b></div>
                         {% csrf_token %}
-                        {{ comment_form.as_p }}
-                        <button class="border rounded text-white bg-primary px-3 py-2" type="submit" name="comment">Post
-                            comment
-                        </button>
+                        <!--{{ comment_form.as_p }}-->
+                        {% crispy comment_form %}
+
                     </form>
                 {% else %}
-                    <br><a href="{% url 'login' %}">Login</a> to add to comments
+                    <br><a href="{% url 'login' %}">Login</a> <span class="ml-2">to add to comments</span>
                     <br>
                 {% endif %}
 

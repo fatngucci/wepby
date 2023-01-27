@@ -121,19 +121,21 @@
             </div>
         </div>
         <div class="w-75 mx-auto">
-            <div class="row mx-auto">
+            <div class="row mx-auto d-flex justify-content-center">
+
                 {% for snack in all_the_snacks %}
                     <!-- <div class="col text-center py-5 m-1 border rounded"> -->
+                    <a href="{% url 'snack-detail' snack.id %}">
                     <div class="card m-1 p-4" href="{% url 'snack-detail' snack.id %}">
-                        <!-- <div class="col align-self-center "> -->
                         <a href="{% url 'snack-detail' snack.id %}">
+                        <!-- <div class="col align-self-center "> -->
                             <img class="card-img-top" style="width: 18rem;" id="img{{ snack.id }}"
                                  src="{{ snack.bilder.url }}" height="150" width="150">
                         </a>
                         <div class="text-center">
-                            <a class="card-title" id="a{{ snack.id }}" href="{% url 'snack-detail' snack.id %}">
+                            <div class="card-title" id="a{{ snack.id }}">
                                 <h4>{{ snack.name }}</h4>
-                            </a>
+                            </div>
                             <div class="card-text m-1">
                                 <h5> {{ snack.preis }}€ </h5>
                                 <p style="font-size: 0.8rem;"> {{ snack.gewicht }}g </p>
@@ -144,7 +146,9 @@
                         </div>
                         <!-- </div> -->
                     </div>
+                    </a>
                 {% endfor %}
+
             </div>
         </div>
     </div>

@@ -5,26 +5,28 @@
 {% block title %}Snack edit{% endblock %}
 
 {% block content %}
-    <h2 class="display-4 text-center mb-5">Edit Snack</h2>
-    {% if not can_delete %}
-        You are not authorized to edit snacks.<br><br>
-    {% else %}
-        <div class="container mb-5">
-            <div class="row mx-auto">
-                <div class="col-md-6 col-sm-12 my-auto">
+    <div class="container-fluid p-2">
+        <div class="display-3 my-2 text-center">Edit snack</div>
+        {% if not can_delete %}
+            You are not authorized to edit snacks.<br><br>
+        {% else %}
+            <div class="container my-5">
+                <div class="row mx-auto">
+                    <div class="col-md-6 col-sm-12 my-auto">
 
-                    <img src="{{ snack.bilder.url }}" height="350" width="350"><br>
-                </div>
-                <div class="col-md-6 col-sm-12 mb-5">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <!--{{ form.as_p }}-->
-                        {% crispy form %}
-                        <!--<button class="border rounded btn-outline-primary px-3 py-2" type="submit">Edit</button>
-                        <button class="border rounded btn-outline-dark px-3 py-2" type="submit" name="cancel">Cancel</button>-->
-                    </form>
+                        <img src="{{ snack.bilder.url }}" height="350" width="350"><br>
+                    </div>
+                    <div class="col-md-6 col-sm-12 mb-5">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <!--{{ form.as_p }}-->
+                            {% crispy form %}
+                            <!--<button class="border rounded btn-outline-primary px-3 py-2" type="submit">Edit</button>
+                            <button class="border rounded btn-outline-dark px-3 py-2" type="submit" name="cancel">Cancel</button>-->
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 {% endblock %}

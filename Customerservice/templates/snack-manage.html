@@ -4,8 +4,9 @@
 {% block title %}Snack manage{% endblock %}
 
 {% block content %}
+    <div class="container-fluid p-2">
     {% if user.is_authenticated %}
-        <h2 class="display-4 text-center">Manage Snacks</h2>
+        <div class="display-3 my-2 text-center">Manage snacks</div>
         {% if not can_delete %}
             You are not authorized to manage snacks.<br><br>
         {% else %}
@@ -13,7 +14,7 @@
             <br><a class="display-4 py-2 text-center" href="{% url 'snack-create' %}"><h3>add snack</h3></a><br>
             <div class="col-12 my-4">
                 <div class="w-75 mx-auto">
-                    <div class="row mx-auto">
+                    <div class="row mx-auto d-flex justify-content-center">
                         {% if delete_button_clicked %}
                             <div class="mx-auto">
                                 <div class="card m-1 p-4">
@@ -102,4 +103,5 @@
             <br>
         {% endif %}
     {% endif %}
+    </div>
 {% endblock %}

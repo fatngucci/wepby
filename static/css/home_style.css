@@ -13,3 +13,11 @@ img {
     overflow: hidden;
     white-space: nowrap;
 }
+
+* {
+    font-family: "Helvetica Rounded";
+}
+
+.asteriskField {
+    display: none;
+}

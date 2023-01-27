@@ -181,7 +181,7 @@ def comment_edit(request, pk: str):
         can_edit = False
         myuser = request.user
         if not myuser.is_anonymous:
-            can_edit = comment.poster == myuser
+            can_edit = (comment.poster == myuser) or myuser.can_delete()
         form = CommentEditForm(request.POST or None, instance=comment)
         context = {'form': form,
                    'can_edit': can_edit,
@@ -192,6 +192,9 @@ def comment_edit(request, pk: str):
 
 def comment_delete(request, pk: str):
     comment = Comment.objects.get(id=int(pk))
-    comment.delete()
+    myuser = request.user
+    if not myuser.is_anonymous:
+        if myuser.can_delete or (comment.poster == myuser):
+            comment.delete()
     snack_id = comment.snack.id
     return redirect('snack-detail', pk=snack_id)

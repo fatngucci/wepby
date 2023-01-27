@@ -45,7 +45,7 @@ class SnackEditForm(forms.ModelForm):
             ),
             Div(
                 Submit('submit', 'Edit', css_class='btn mx-auto'),
-                Submit('cancel', 'Cancel', css_class='btn mx-auto'),
+                Submit('cancel', 'Cancel', css_class='btn-secondary mx-auto'),
                 css_class='text-center'
             ),
         )
@@ -68,6 +68,7 @@ class CommentEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['sternbewertung'].label = "Rating"
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
@@ -76,7 +77,7 @@ class CommentEditForm(forms.ModelForm):
 
             Div(
                 Submit('submit', 'Edit', css_class='btn mx-auto'),
-                Submit('cancel', 'Cancel', css_class='btn mx-auto'),
+                Submit('cancel', 'Cancel', css_class='btn-secondary mx-auto'),
                 css_class='text-center'
             ),
         )

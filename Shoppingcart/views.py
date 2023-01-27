@@ -76,15 +76,19 @@ def pay(request):
 
     if request.method == 'POST':
 
-        form = PaymentForm(request.POST)
-        form.instance.benutzer = benutzer
-        if form.is_valid():
-            form.save()
-            paid = True
+        if 'back' in request.POST:
+            return redirect('snack-list')
 
-            ShoppingCart.objects.get(benutzer=benutzer).delete()
         else:
-            print(form.errors)
+            form = PaymentForm(request.POST)
+            form.instance.benutzer = benutzer
+            if form.is_valid():
+                form.save()
+                paid = True
+
+                ShoppingCart.objects.get(benutzer=benutzer).delete()
+            else:
+                print(form.errors)
 
     else:
         if benutzer.is_authenticated:

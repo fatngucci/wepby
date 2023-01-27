@@ -43,6 +43,26 @@ class CommentForm(forms.ModelForm):
             'snack': forms.HiddenInput(),
         }
 
+    def __init__(self, *args, **kwargs):
+        widgets = {
+            'sternbewertung': forms.Select(choices=Comment.STERN_BEWERTUNG),
+            'comment_id': forms.HiddenInput()
+        }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['sternbewertung'].label = "Rating"
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            Column('text', css_class='form-group  mx-auto'),
+            Column('sternbewertung', css_class='form-group mx-auto'),
+
+            Div(
+                Submit('comment', 'Post comment', css_class='btn mx-auto'),
+                css_class='text-center'
+            ),
+        )
+
 
 class CommentEditForm(forms.ModelForm):
     class Meta:
@@ -60,6 +80,7 @@ class CommentEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['sternbewertung'].label = "Rating"
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
@@ -75,7 +96,7 @@ class CommentEditForm(forms.ModelForm):
 
 
 class SearchForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Name',}), required=True)
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Name',}), required=False)
     description = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Description',}), required=False)
     #produkt_bewertung = forms.DecimalField(widget=forms.NumberInput(attrs={'placeholder': 'Bewertung'}), required=False)
     #produkt_bewertung = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'Bewertung'}), required=False)
@@ -99,9 +120,9 @@ class SearchForm(forms.ModelForm):
         self.helper.form_show_labels = False
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
-            Column('name', css_class='form-group mx-1'),
-            Column('description', css_class='form-group mx-1'),
-            Column('rating', css_class='form-group mx-1'),
+            Column('name', css_class='form-group mx-1 my-auto pt-3'),
+            Column('description', css_class='form-group mx-1 my-auto pt-3'),
+            Column('rating', css_class='form-group mx-1 my-auto pt-3'),
             Div(
                 Submit('submit', 'Search', css_class='btn my-auto mx-1')
                 , css_class='mx-3 my-auto',

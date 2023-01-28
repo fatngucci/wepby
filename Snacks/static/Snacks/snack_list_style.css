@@ -72,3 +72,12 @@ img {
 * {
     font-family: "Helvetica Rounded";
 }
+
+#snack-cards {
+    text-decoration: none;
+    color: gray;
+}
+
+#snack-cards:hover {
+    color: black;
+}

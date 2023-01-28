@@ -23,10 +23,10 @@ from Useradmin.views import HomeBirthdayView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('home/', HomeBirthdayView.as_view(template_name='home.html'), name='home'), # old one
+    path('', HomeBirthdayView.as_view(template_name='home.html'), name='home'), # old one
     # path('', HomeBirthdayView.as_view(template_name='home.html'), name='home'),
     #path('', Snacks.views.snack_list, name='snack-list'),
-    path('', Snacks.views.snack_list, name='home'),
+    #path('', Snacks.views.snack_list, name='snack-list'),
     path('useradmin/', include('Useradmin.urls')),
     path('useradmin/', include('django.contrib.auth.urls')),
     path('snacks/', include('Snacks.urls')),

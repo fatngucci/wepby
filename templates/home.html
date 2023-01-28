@@ -4,6 +4,8 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+
+
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/home_style.css' %}">
 {% endblock %}
@@ -11,6 +13,7 @@
 {% block title %}Homepage Titel{% endblock %}
 
 {% block header %}
+
     <div class="mw-100 d-flex justify-content-between">
         <div></div>
         <div class="display-3 text-center py-2 mx-auto">Snacks'n'Juice</div>
@@ -26,7 +29,7 @@
         </a>
         -->
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <nav class="navbar navbar-expand-xl navbar-light bg-warning">
         <!--<a class="navbar-brand" href="{% url 'snack-list' %}">Snacks</a>-->
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -37,31 +40,34 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item mx-2">
+                <li class="nav-item mx-1">
+                    <a class="nav-link h4" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item mx-1">
                     <a class="nav-link h4" href="{% url 'snack-list' %}">Snacks</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item mx-2">
+                    <li class="nav-item mx-1">
                         <a class="nav-link h4" href="{% url 'shopping-cart-show' %}">
                             Shopping Cart({{ request.user.count_shopping_cart_items }})
                         </a>
                     </li>
                     {% if user.can_delete %}
-                        <li class="nav-item mx-2">
+                        <li class="nav-item mx-1">
                             <a class="nav-link h4" href="{% url 'menu' %}">Customerservice</a>
                         </li>
                     {% endif %}
                 {% endif %}
 
             </ul>
-            <ul class="navbar-nav ml-auto mr-3">
+            <ul class="navbar-nav ml-auto mr-2">
                 {% if user.is_authenticated %}
-                    <li class="nav-item mx-2">
+                    <li class="nav-item mx-1">
                         <a class="nav-link h4" href="{% url 'logout' %}">Logout</a>
                     </li>
 
                 {% else %}
-                    <li class="nav-item mx-2">
+                    <li class="nav-item mx-1">
                         <a class="nav-link h4" href="{% url 'login' %}">Login</a>
                     </li>
 
@@ -70,8 +76,8 @@
             </ul>
 
 
-            <form method="POST" class="row justify-content-center my-lg-0">
-            </form>
+            <!--<form method="POST" class="row justify-content-center my-lg-0">
+            </form>-->
         </div>
     </nav>
 {% endblock %}

@@ -3,10 +3,14 @@ from django.contrib.auth import (
 )
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.base import TemplateView
+
+from Snacks.forms import SearchForm
+from Snacks.models import Snack
 from .forms import MySignUpForm
 from .models import MyUser
 
@@ -44,3 +48,4 @@ class HomeBirthdayView(TemplateView):
         context = super(HomeBirthdayView, self).get_context_data(**kwargs)
         context['myuser_has_birthday_today'] = myuser_has_birthday_today
         return context
+

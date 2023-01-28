@@ -113,7 +113,7 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="card-title">{{ comment.text }}<br></div>
-                                <small class="card-text">{{ comment.poster.username }}
+                                <small class="card-text text-muted">{{ comment.poster.username }}
                                     on {{ comment.timestamp }}</small>
                                 <div>
                                     {% for star in comment.get_sterne %}

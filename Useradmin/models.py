@@ -35,7 +35,7 @@ class MyUser(AbstractUser):
         return self.is_superuser or self.is_staff
 
     def can_delete(self):
-        #return self.is_superuser_or_customer_service()
+        # return self.is_superuser_or_customer_service()
         return self.is_superuser_or_staff()
 
     def count_shopping_cart_items(self):
@@ -45,6 +45,8 @@ class MyUser(AbstractUser):
             if shopping_carts:
                 shopping_cart = shopping_carts.first()
                 count = shopping_cart.get_number_of_items()
+            else:
+                ShoppingCart.objects.create(benutzer=self)
 
         return count
 

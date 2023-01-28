@@ -1,7 +1,23 @@
-body{
+body {
     background-color: white;
+    background: white;
 }
 
-img{
+img {
     object-fit: scale-down;
+}
+
+.card-title,
+.card-subtitle {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+* {
+    font-family: "Helvetica Rounded";
+}
+
+.asteriskField {
+    display: none;
 }

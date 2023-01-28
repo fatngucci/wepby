@@ -1,57 +1,32 @@
 {% extends 'home.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}Snack edit{% endblock %}
 
-{% block logged_in_content %}
-<h2>Snack edit</h2>
-    {% if not can_delete %}
-        You are not authorized to edit snacks.<br><br>
-    {% else %}
+{% block content %}
+    <div class="container-fluid p-2">
+        <div class="display-3 my-2 text-center">Edit snack</div>
+        {% if not can_delete %}
+            You are not authorized to edit snacks.<br><br>
+        {% else %}
+            <div class="container my-5">
+                <div class="row mx-auto">
+                    <div class="col-md-6 col-sm-12 my-auto">
 
-        <table>
-        <img src="{{ snack.bilder.url }}" height="350" width="350"><br>
-        <tr>
-            <td><b>Name:</b></td>
-            <td>{{ snack.name }}<br></td>
-        </tr>
-        <tr>
-            <td><b>Gewicht:</b></td>
-            <td>{{ snack.gewicht }} g<br></td>
-        </tr>
-        <tr>
-            <td><b>Beschreibung:</b></td>
-            <td>{{ snack.beschreibung }}<br></td>
-        </tr>
-        <tr>
-            <td><b>Artikelnummer:</b></td>
-            <td>{{ snack.artikelnummer }}</td>
-        </tr>
-        <tr>
-            <td><b>Preis:</b></td>
-            <td>{{ snack.preis }} €</td>
-        </tr>
-        <tr>
-            <td><b>Hersteller:</b></td>
-            <td>{{ snack.hersteller.username }}</td>
-        </tr>
-        <tr>
-            <td><b>Erstellungs-Zeitstempel:</b></td>
-            <td>{{ snack.erstellungs_zeitstempel }}</td>
-        </tr>
-        <tr>
-            <td><b>Produktinfo:</b></td>
-            <td><a href="{{ snack.produkt_info.url }}">{{ snack.produkt_info.name }}</a></td>
-        </tr>
-
-    </table>
-
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Edit</button>
-            <button type="submit" name="cancel">Cancel</button>
-        </form>
-
-    {% endif %}
+                        <img src="{{ snack.bilder.url }}" height="350" width="350"><br>
+                    </div>
+                    <div class="col-md-6 col-sm-12 mb-5">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <!--{{ form.as_p }}-->
+                            {% crispy form %}
+                            <!--<button class="border rounded btn-outline-primary px-3 py-2" type="submit">Edit</button>
+                            <button class="border rounded btn-outline-dark px-3 py-2" type="submit" name="cancel">Cancel</button>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

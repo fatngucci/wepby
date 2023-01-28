@@ -4,22 +4,23 @@ from django.urls import reverse_lazy
 from .forms import SnackEditForm, CommentEditForm
 from Snacks.models import Snack, Comment
 
+
 # Create your views here.
 
 
-#@staff_member_required(login_url='/useradmin/login/')
+# @staff_member_required(login_url='/useradmin/login/')
 def menu_view(request):
     can_delete = False
     myuser = request.user
     if not myuser.is_anonymous:
         can_delete = myuser.can_delete()
     context = {
-                'can_delete': can_delete,
-                }
+        'can_delete': can_delete,
+    }
     return render(request, 'menu.html', context)
 
 
-#@staff_member_required(login_url='/useradmin/login/')
+# @staff_member_required(login_url='/useradmin/login/')
 def snack_edit_view(request, pk: str):
     snack_id = pk
     if request.method == 'POST':
@@ -29,13 +30,15 @@ def snack_edit_view(request, pk: str):
         if form.is_valid():
             snack = Snack.objects.get(id=snack_id)
             new_name = form.cleaned_data['name']
+            new_beschreibung = form.cleaned_data['beschreibung']
             new_gewicht = form.cleaned_data['gewicht']
             new_artikelnummer = form.cleaned_data['artikelnummer']
             new_preis = form.cleaned_data['preis']
-            new_hersteller = form.cleaned_data['hersteller']
+            new_hersteller = form.cleaned_data['hersteller'] # ??
             new_pic = form.cleaned_data['bilder']
             new_file = form.cleaned_data['produkt_info']
             snack.name = new_name
+            snack.beschreibung = new_beschreibung
             snack.gewicht = new_gewicht
             snack.artikelnummer = new_artikelnummer
             snack.preis = new_preis
@@ -70,7 +73,7 @@ def snack_manage_view(request):
 
     if request.method == 'POST' and can_delete:
         if 'delete' in request.POST:
-            #return redirect('snack-delete', request.POST['snack_id'])
+            # return redirect('snack-delete', request.POST['snack_id'])
             delete_button_clicked = True
             the_id = request.POST['snack_id']
             the_snack = Snack.objects.get(id=the_id)
@@ -95,7 +98,6 @@ def snack_manage_view(request):
 
 
 def comment_edit_view(request, pk: str):
-
     comment_id = pk
     myuser = request.user
     comment = Comment.objects.get(id=comment_id)
@@ -109,6 +111,7 @@ def comment_edit_view(request, pk: str):
             comment.text = new_text
             comment.sternbewertung = new_stern
             comment.save()
+        return redirect('comment-manage')
 
     else:
         can_delete = False
@@ -124,6 +127,7 @@ def comment_edit_view(request, pk: str):
                    }
         return render(request, 'comment-edit-cs.html', context)
 
+
 def comment_manage_view(request):
     all_the_comments = Comment.objects.all()
     can_delete = False
@@ -136,7 +140,7 @@ def comment_manage_view(request):
 
     if request.method == 'POST' and can_delete:
         if 'delete' in request.POST:
-            #return redirect('snack-delete', request.POST['comment_id'])
+            # return redirect('snack-delete', request.POST['comment_id'])
             delete_button_clicked = True
             the_id = request.POST['comment_id']
             the_comment = Comment.objects.get(id=the_id)
@@ -151,12 +155,10 @@ def comment_manage_view(request):
             delete_button_clicked = False
 
     context = {
-            'all_the_comments': all_the_comments,
-            'can_delete': can_delete,
-            'delete_button_clicked': delete_button_clicked,
-            'the_comment': the_comment
+        'all_the_comments': all_the_comments,
+        'can_delete': can_delete,
+        'delete_button_clicked': delete_button_clicked,
+        'the_comment': the_comment
     }
 
     return render(request, 'comment-manage.html', context)
-
-

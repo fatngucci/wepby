@@ -6,14 +6,18 @@
 
 {% block content %}
     <div class="container my-2 py-2">
-        <h2 class="display-4 py-2 text-center">Users list</h2>
-        <div class="row align-items-center">
+        <div class="display-3 my-2 text-center">Users list</div>
+        <div class="row align-items-center my-5">
             {% for myuser in all_myusers %}
-                <div class="col m-2 p-4">
-                    <p>{{ myuser.first_name }} {{ myuser.last_name }}</p>
-                    <p> ({{ myuser.date_of_birth }}) </p>
-                    <img src="{{ myuser.profile_picture.url }}" height="150" width="150"><br>
-                    <a href="{{ myuser.some_file.url }}">Some uploaded file</a>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="card m-2 p-4" style="height: 22rem">
+                        <img class="card-img-top" src="{{ myuser.profile_picture.url }}" height="150" width="150"><br>
+                        <div class="card-body">
+                            <p>Name: {{ myuser.first_name }} {{ myuser.last_name }}</p>
+                            <small>DoB: {{ myuser.date_of_birth }}</small>
+                            <a href="{{ myuser.some_file.url }}"><small>uploaded file</small></a>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
 
